@@ -82,14 +82,18 @@ document.getElementById("startFocus").addEventListener("click",()=>{
 document.getElementById("suggestions").addEventListener("click",()=>notify("Try a 5-minute eye rest, drink water and step away from the screen."));
 document.getElementById("personaBtn").addEventListener("click",()=>show("persona"));
 document.getElementById("navProfile").addEventListener("click",()=>{
+  // Profile button should open the Profile/Persona screen
+  // instead of opening a planner.
+  document.querySelectorAll(".persona-choice").forEach(choice=>{
+    choice.classList.toggle(
+      "selected",
+      choice.dataset.persona === selectedPersona
+    );
+  });
+
   updatePersonaUI();
-  if(selectedPersona==="Faculty"){
-    show("facultyPlanner");
-    notify("Faculty planner opened 👩‍🏫");
-  }else{
-    show("breaks");
-    notify(selectedPersona==="Gaming & Entertainment Student"?"Study Break Planner opened 🎮":"Study Break Planner opened 🎓");
-  }
+  show("persona");
+  notify("Profile opened 👤");
 });
 
 calculateFatigue();
